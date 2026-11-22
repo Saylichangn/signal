@@ -12,10 +12,6 @@ python -m http.server 8080
 
 then visit `http://localhost:8080`.
 
-## Upload to GitHub
-
-This folder is already an initialized git repository with an initial commit on `main`.
-To publish it to your existing empty GitHub repo:
 
 ```
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
@@ -25,26 +21,8 @@ git push -u origin main
 
 If the remote already exists, use `git remote set-url origin <url>` instead of `add`.
 
-## What's interactive
-
-- **Header / navigation** — anchor links to every section, active-section highlighting, mobile menu.
-- **Console** ("Open the console") — writable journal with writing prompts, word count, and local save.
-- **Live monitor** — animated dual-channel waveform; drag across it to scrub time.
-- **Channel faders** — dragging them updates frequencies and the waveform in real time.
-- **Wise Mind** — editable line, balance slider, Hold On / Turn Toward toggles.
-- **Switchboard** — skill chips jump to the relevant instrument.
-- **STOP dial** — 20-second, four-phase timer with progress ring.
-- **TIPP switches + dive-reflex slider**, with state saved locally.
-- **Opposite Action** — invert toggle flips the plotted wave.
-- **Check the Facts** — editable forecast/report lines, intensity sliders, forecast↔report swap.
-- **Window of Tolerance** — draggable "you are here" marker.
-- **4-7-8 pacer** — animated ring, phase countdown, 3-minute session timer, play/pause.
-- **5-4-3-2-1 grounding** — clickable sense counters.
-- **DEAR MAN patch bay** — seven editable lines, re-patch animation, assemble/copy the sentence to the journal, 38-second read-aloud timer.
-- **Cognitive triangle** — static reference diagram (no movement).
-- **Thought record** — editable fields, distortion chips, add-evidence, belief rating, save to journal.
-- **The 90-second wave** — playable animated chemistry curve.
-- **Print field card** — opens the browser print dialog with a print stylesheet.
+## Site
+Open https://signal-ten-kappa.vercel.app/
 
 Everything you type is stored in this browser's `localStorage` only. Nothing is sent anywhere.
 
