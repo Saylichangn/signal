@@ -172,7 +172,7 @@
     const amp = .25 + (emo + rea + ten) / 3 * .45;
     wave('rgba(217,154,108,.9)', phase, amp);
     wave('rgba(217,232,165,.9)', phase + Math.PI / 2, amp);
-    ctx.fillStyle = 'rgba(242,233,216,.35)'; ctx.font = '10px "IBM Plex Mono", monospace';
+    ctx.fillStyle = 'rgba(242,233,216,.35)'; ctx.font = '11px "Barlow Condensed", sans-serif';
     ctx.fillText('AMPLITUDE / TIME', 10, 18);
   }
 
@@ -488,7 +488,7 @@
     const mx = xAt(waveT, w);
     const my = h * .78 - waveY(waveT) * h * .58;
     ctx.fillStyle = '#d9e8a5'; ctx.beginPath(); ctx.arc(mx, my, 5, 0, 7); ctx.fill();
-    ctx.font = '11px "IBM Plex Mono", monospace'; ctx.fillStyle = 'rgba(214,190,145,.7)';
+    ctx.font = '12px "Barlow Condensed", sans-serif'; ctx.fillStyle = 'rgba(214,190,145,.7)';
     ctx.fillText('RISE', w * .09, h - 12); ctx.fillText('CREST', w * .25, h - 12);
     ctx.fillText('FALL', w * .38, h - 12); ctx.fillText('CHEMISTRY DONE — 90s', chemX + 10, 28);
     ctx.fillText('RE-TRIGGERED BY THE STORY', w * .62, h * .34);
