@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SIGNAL — a skill console for the loud parts of being a person. Twenty-seven evidence-based skills from DBT and CBT, rebuilt as instruments." />
+  <title>SIGNAL — Every thought has a frequency</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d15'/%3E%3Crect x='6' y='6' width='20' height='20' fill='none' stroke='%23d99a6c' stroke-width='3'/%3E%3Crect x='12' y='12' width='8' height='8' fill='%23d99a6c'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#home" aria-label="SIGNAL home">
+        <span class="brand-mark"><span></span></span>
+        <span class="brand-name">SIGNAL</span>
+        <span class="brand-tag">SKILL CONSOLE <i>/</i> V2.4</span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="#home" class="active">INSTRUMENTS</a>
+        <a href="#rack">THE THEORY</a>
+        <a href="#switchboard">THE PRACTICE</a>
+        <a href="#wave">FIELD NOTES</a>
+      </nav>
+      <div class="header-right">
+        <span class="session-dot"><i></i> <span id="sessionCount">412</span> IN SESSION</span>
+        <button class="btn btn-outline" data-open-console>OPEN THE RACK <span>↗</span></button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ 1. HERO ============ -->
+    <section id="home" class="hero section" data-bg="assets/forest-hero.jpg">
+      <div class="hero-shade"></div>
+      <div class="wrap hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">A FIELD GUIDE FOR THE LOUD PARTS // 001</p>
+          <h1>EVERY <em>thought</em><br />HAS A <span class="accent-peach">FREQUENCY.</span></h1>
+          <p class="lede">Twenty-seven evidence-based skills rebuilt as instruments. Slide a fader, invert a wave, patch a sentence — and watch the reaction change in real time. Not a journal. Not a streak. A console.</p>
+          <div class="btn-row">
+            <button class="btn btn-lime" data-open-console>OPEN THE CONSOLE <span>→</span></button>
+            <button class="btn btn-lime-soft" data-calibrate>2-MIN CALIBRATION <span>▣</span></button>
+          </div>
+          <p class="fineprint">FREE / NO ACCOUNT / WORKS AT 3 A.M. — NOT A REPLACEMENT FOR THERAPY OR EMERGENCY CARE</p>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">04</span><span class="stat-label">THERAPY MODULES</span></div>
+          <div class="stat"><span class="stat-num">27</span><span class="stat-label">SKILLS IN THE RACK</span></div>
+          <div class="stat"><span class="stat-num">90</span><span class="stat-label">SECONDS / EMOTION WAVE</span></div>
+          <div class="stat"><span class="stat-num">4:7:8</span><span class="stat-label">BREATH PACER</span></div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="console-strip">
+          <!-- MONITOR -->
+          <div class="panel monitor-panel">
+            <div class="panel-head">
+              <span><i class="live-dot"></i> MONITOR — LIVE SESSION</span>
+              <span>CH 01 / THREAT RESPONSE</span>
+            </div>
+            <div class="panel-legend">
+              <span><i class="line-swatch peach"></i> EMOTION MIND — <b id="emotionHz">3.1</b> Hz</span>
+              <span><i class="line-swatch lime"></i> REASON MIND — <b id="reasonHz">9.4</b> Hz</span>
+              <span class="drag-hint">⇆ DRAG WAVE TO SCRUB</span>
+            </div>
+            <div class="monitor-screen">
+              <canvas id="monitorCanvas"></canvas>
+              <div class="monitor-readout"><span id="waveTime">0:00</span> / LIVE</div>
+            </div>
+            <div class="panel-foot">
+              <span>SCRUB THE WAVE TO SEE HOW LONG THE CHEMISTRY HAS BEEN RUNNING.</span>
+              <span class="sig" id="signalStrength">SIGNAL 78%</span>
+            </div>
+          </div>
+
+          <!-- FADERS -->
+          <div class="panel faders-panel">
+            <div class="panel-head"><span>CHANNEL FADERS</span><span>THREE CHANNELS</span></div>
+            <div class="faders">
+              <div class="fader" data-fader="anxiety">
+                <output>78</output>
+                <input type="range" min="0" max="100" value="78" orient="vertical" aria-label="Anxiety level" />
+                <label>ANXIETY</label>
+              </div>
+              <div class="fader" data-fader="rumination">
+                <output>54</output>
+                <input type="range" min="0" max="100" value="54" orient="vertical" aria-label="Rumination level" />
+                <label>RUMINATION</label>
+              </div>
+              <div class="fader" data-fader="tension">
+                <output>31</output>
+                <input type="range" min="0" max="100" value="31" orient="vertical" aria-label="Tension level" />
+                <label>TENSION</label>
+              </div>
+            </div>
+            <p class="panel-note">Slide a channel. The mix changes — the feeling is still allowed to be there.</p>
+          </div>
+
+          <!-- WISE MIND -->
+          <div class="panel wise-panel">
+            <div class="panel-head"><span>WISE MIND</span><span id="wiseCount">02 / 30</span></div>
+            <div class="wise-inner">
+              <div class="wise-bars" aria-hidden="true">
+                <div class="bar-col lime"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="bar-col peach"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="wise-actions">
+                <button class="round-action" id="holdBtn"><span>!</span></button>
+                <span class="round-label">HOLD ON</span>
+                <button class="round-action" id="turnBtn"><span>↗</span></button>
+                <span class="round-label">TURN TOWARD</span>
+              </div>
+              <div class="wise-write">
+                <label for="wiseInput">TYPE / EDIT DELETE</label>
+                <div class="editable" id="wiseInput" contenteditable="true" spellcheck="true" data-placeholder="What is true right now? Write it here…">I can hold this and still take one small step.</div>
+              </div>
+            </div>
+            <div class="wise-slider">
+              <span>REASON</span>
+              <input type="range" id="wiseSlider" min="0" max="100" value="50" aria-label="Reason to emotion balance" />
+              <span>EMOTION</span>
+            </div>
+            <div class="panel-head panel-sub"><span>◀ CENTER</span><span>WISE MIND — THE DIALOGUE, NOT TRUE</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. THE RACK ============ -->
+    <section id="rack" class="rack section" data-bg="assets/forest-dark.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap rack-grid">
+        <div class="rack-intro">
+          <p class="eyebrow">THE RACK</p>
+          <h2>FOUR MODULES,<br /><em>ONE CONSOLE.</em></h2>
+          <p class="body-copy">DBT hands you skills for surviving the moment you're in. CBT hands you the tools to audit the thought underneath it. SIGNAL puts both on the same desk, so you can use them in the order that actually works.</p>
+          <div class="mini-rule"><span>BODY</span> → <span>THOUGHT</span> → <span>ACTION</span></div>
+          <p class="fineprint">EVERY INSTRUMENT TURNS ONE OF THESE THREE. THAT'S THE WHOLE TRICK.</p>
+        </div>
+        <div class="module-list" id="moduleList">
+          <a class="module-row active" href="#dt" data-module="01">
+            <span class="module-num">1</span>
+            <div><h3>DISTRESS TOLERANCE</h3><p>For the moments you cannot fix, only survive.</p></div>
+            <span class="module-link">SKILLS ↗</span>
+          </a>
+          <a class="module-row" href="#er" data-module="02">
+            <span class="module-num">2</span>
+            <div><h3>EMOTION REGULATION</h3><p>Change the channel without muting the feeling.</p></div>
+            <span class="module-link">SKILLS ↗</span>
+          </a>
+          <a class="module-row" href="#mindfulness" data-module="03">
+            <span class="module-num">3</span>
+            <div><h3>MINDFULNESS</h3><p>Notice the signal before it drives the car.</p></div>
+            <span class="module-link">SKILLS ↗</span>
+          </a>
+          <a class="module-row" href="#dear-man" data-module="04">
+            <span class="module-num">4</span>
+            <div><h3>INTERPERSONAL</h3><p>Say the true thing without dropping the relationship.</p></div>
+            <span class="module-link">SKILLS ↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="corner-tag">SPEC SHEET / SIDE A</div>
+    </section>
+
+    <!-- ============ 3. SWITCHBOARD ============ -->
+    <section id="switchboard" class="switchboard section" data-bg="assets/forest-path.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">THE SWITCHBOARD</p><h2>WHAT'S LOUDEST<br />RIGHT NOW?</h2></div>
+          <p class="head-note">You do not pick a skill by diagnosis. You pick it by what your body is doing at this exact second. Start with the loudest thing and work down.</p>
+        </div>
+        <div class="switch-wrap">
+          <div class="switch-source">
+            <div class="source-box"><span>WHAT'S</span><strong>LOUDEST?</strong><small>RIGHT NOW</small></div>
+            <p>PICK ONE — NOT FOUR</p>
+          </div>
+          <div class="switch-lines">
+            <div class="switch-row" data-target="dt">
+              <span class="row-num">01</span>
+              <p class="row-text">My body is at a 9 — hot, shaking, can't string a sentence together</p>
+              <div class="skill-chain"><button class="chip" data-goto="dt">TIPP</button><span>›</span><button class="chip ghost" data-goto="dt">STOP</button></div>
+              <span class="row-time">≈ 30 SEC</span>
+            </div>
+            <div class="switch-row" data-target="dear-man">
+              <span class="row-num">02</span>
+              <p class="row-text">I'm about to send the message I will regret at 8 a.m.</p>
+              <div class="skill-chain"><button class="chip" data-goto="dear-man">24-HOUR RULE</button><span>›</span><button class="chip ghost" data-goto="dear-man">DEAR MAN</button></div>
+              <span class="row-time">≈ 2 MIN</span>
+            </div>
+            <div class="switch-row" data-target="cognitive">
+              <span class="row-num">03</span>
+              <p class="row-text">the same thought on a loop, since Tuesday</p>
+              <div class="skill-chain"><button class="chip" data-goto="cognitive">THOUGHT RECORD</button><span>›</span><button class="chip ghost" data-goto="cognitive">CHECK THE FACTS</button></div>
+              <span class="row-time">≈ 5 MIN</span>
+            </div>
+            <div class="switch-row" data-target="mindfulness">
+              <span class="row-num">04</span>
+              <p class="row-text">I feel nothing. flat, numb, watching myself from a distance.</p>
+              <div class="skill-chain"><button class="chip" data-goto="mindfulness">5-4-3-2-1</button><span>›</span><button class="chip ghost" data-goto="er">OPPOSITE ACTION</button></div>
+              <span class="row-time">≈ 3 MIN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">THREE MINUTE EDITION</div>
+    </section>
+
+    <!-- ============ 4. MODULE 01 — DT ============ -->
+    <section id="dt" class="module-section section" data-bg="assets/forest-dark.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">MODULE 01 — CRISIS SURVIVAL</p><h2>SURVIVE THE MOMENT.<br />FIX IT LATER.</h2></div>
+          <p class="head-note">Distress tolerance is not about calming down. It is about not making the next ten minutes worse while the wave does what waves do.</p>
+        </div>
+        <div class="two-col">
+          <!-- STOP -->
+          <div class="panel stop-panel">
+            <div class="panel-head"><span>SKILL 01 — EMERGENCY CUT</span><span>20 SEC</span></div>
+            <div class="stop-quadrants">
+              <div><b>S</b><span>STOP</span><small>Freeze the reaction.</small></div>
+              <div><b>T</b><span>TAKE A STEP BACK</span><small>Leave the room, breathe out.</small></div>
+              <div><b>O</b><span>OBSERVE</span><small>Name what is actually here.</small></div>
+              <div><b>P</b><span>PROCEED MINDFULLY</span><small>One small, useful move.</small></div>
+            </div>
+            <div class="stop-dial-wrap">
+              <svg class="stop-dial" viewBox="0 0 220 220" aria-hidden="true">
+                <circle class="dial-track" cx="110" cy="110" r="92" />
+                <circle class="dial-progress" id="stopProgress" cx="110" cy="110" r="92" />
+                <circle class="dial-inner" cx="110" cy="110" r="74" />
+              </svg>
+              <button class="stop-core" id="stopBtn"><span id="stopLabel">STOP</span><small id="stopSub">TAP TO BEGIN</small></button>
+            </div>
+            <p class="panel-note center">PROCEED ONLY ONCE THE WAVE HAS CRESTED — NOT WHILE YOU ARE STILL RISING.</p>
+            <div class="stop-phases" id="stopPhases"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <!-- TIPP -->
+          <div class="panel tipp-panel">
+            <div class="panel-head"><span>SKILL 02 — TIPP</span><span class="linkish">CHANGE THE BODY FIRST</span></div>
+            <p class="panel-note">You cannot argue a nervous system down. TIPP changes the chemistry instead of the argument.</p>
+            <div class="tipp-list">
+              <label class="tipp-row"><span class="t-letter">T</span><span class="t-info"><b>TEMPERATURE</b><small>Cold water on face, 30 seconds. Triggers the dive reflex.</small></span><input type="checkbox" class="switch-input" /><i class="switch-ui"></i></label>
+              <label class="tipp-row"><span class="t-letter">I</span><span class="t-info"><b>INTENSE EXERCISE</b><small>Ten minutes that make you breathe hard. Burns the adrenaline.</small></span><input type="checkbox" class="switch-input" /><i class="switch-ui"></i></label>
+              <label class="tipp-row"><span class="t-letter">P</span><span class="t-info"><b>PACED BREATHING</b><small>Exhale longer than you inhale. 4 in, 8 out, six times a minute.</small></span><input type="checkbox" class="switch-input" /><i class="switch-ui"></i></label>
+              <label class="tipp-row"><span class="t-letter">P</span><span class="t-info"><b>PAIRED RELAXATION</b><small>Tense a muscle on the inhale, release on the exhale.</small></span><input type="checkbox" class="switch-input" /><i class="switch-ui"></i></label>
+            </div>
+            <div class="dive-reflex">
+              <div class="panel-head"><span>DIVE REFLEX — HEART RATE</span><span id="diveValue">BASELINE</span></div>
+              <input type="range" id="diveSlider" min="0" max="100" value="50" aria-label="Dive reflex heart rate" />
+              <div class="dive-bars" id="diveBars"></div>
+              <div class="panel-head panel-sub"><span>BASELINE</span><span>DIP</span><span>-18%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">DBT / MODULE 01</div>
+    </section>
+
+    <!-- ============ 5. MODULE 02 — ER ============ -->
+    <section id="er" class="module-section section light-top" data-bg="assets/mountains.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">MODULE 02 — THE DIALECTIC</p><h2>CHANGE THE CHANNEL,<br />NOT THE FEELING.</h2></div>
+          <p class="head-note">Every emotion is information with a body attached. You are not trying to feel nothing — you are trying to stop the feeling from driving.</p>
+        </div>
+        <div class="two-col">
+          <div class="panel opposite-panel">
+            <div class="panel-head"><span>SKILL 03 — OPPOSITE ACTION</span><label class="mini-toggle">INVERT <input type="checkbox" id="invertToggle" checked /><i></i></label></div>
+            <p class="panel-note">ACT AGAINST THE URGE, NOT AGAINST THE FACT.</p>
+            <div class="graph-box">
+              <span class="graph-edge tl">URGE</span><span class="graph-edge tr">FLIP HERE</span><span class="graph-edge br">ACTION</span>
+              <canvas id="oppositeCanvas"></canvas>
+            </div>
+            <div class="opposite-notes">
+              <div><b>FEAR</b><span>approach what you avoid</span></div>
+              <div><b>SHAME</b><span>show the thing you hide</span></div>
+              <div><b>ANGER</b><span>move gently, or leave well</span></div>
+              <div><b>SADNESS</b><span>get up and do one small thing</span></div>
+            </div>
+          </div>
+          <div class="panel facts-panel">
+            <div class="panel-head"><span>SKILL 04 — CHECK THE FACTS</span><button class="mini-btn" id="forecastBtn">FORECAST ↔ REPORT</button></div>
+            <p class="panel-note">SET THE SIGNAL AS A FORECAST, NOT A VERDICT.</p>
+            <div class="fact-block">
+              <div class="fact-label"><span>"PREDICTED"</span><span id="predictedVal">9 / 10 unbearable</span></div>
+              <div class="editable-line" id="predictedThought" contenteditable="true" spellcheck="true" data-placeholder="Type the thought you are forecasting…">"If I say no, she will leave me."</div>
+              <input type="range" id="predictedSlider" min="0" max="10" value="9" aria-label="Predicted intensity" />
+            </div>
+            <div class="fact-block">
+              <div class="fact-label"><span>"REPORTED"</span><span id="reportedVal">4 / 10, lasted 40 min</span></div>
+              <div class="editable-line" id="reportedThought" contenteditable="true" spellcheck="true" data-placeholder="Type what actually happened…">"She said she was tired. She texted this morning."</div>
+              <input type="range" id="reportedSlider" min="0" max="10" value="4" aria-label="Reported intensity" />
+            </div>
+            <div class="fact-questions" id="factQuestions">
+              <div><span>01</span><p contenteditable="true" data-placeholder="Write your answer…">What happened — in camera language, no adjectives?</p></div>
+              <div><span>02</span><p contenteditable="true" data-placeholder="Write your answer…">What am I assuming that I have not been told?</p></div>
+              <div><span>03</span><p contenteditable="true" data-placeholder="Write your answer…">What else could be true, and fit every fact?</p></div>
+              <div><span>04</span><p contenteditable="true" data-placeholder="Write your answer…">Is this intensity a 9, or a 9 because I am tired?</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="tolerance-panel panel">
+          <div class="tolerance-label">
+            <p class="eyebrow">WINDOW OF TOLERANCE</p>
+            <p>The band where you can think, feel and still choose. Most skills are attempts to get back inside it.</p>
+            <span class="fineprint">DANIEL SIEGEL, 1999</span>
+          </div>
+          <div class="tolerance-grid">
+            <div class="tol-row hyper"><span>HYPERAROUSAL — ANXIOUS, RAGE, PANIC</span><span>TIPP · STOP · PACED BREATHING</span></div>
+            <div class="tol-row inside"><span>INSIDE — CURIOUS, SAD, ANNOYED, PRESENT</span><span>CHECK THE FACTS · DEAR MAN</span></div>
+            <div class="tol-row hypo"><span>HYPOAROUSAL — NUMB, FLAT, DISCONNECTED</span><span>OPPOSITE ACTION · ACTIVATION</span></div>
+            <input type="range" id="tolSlider" min="0" max="100" value="50" aria-label="Where you are in the window of tolerance" />
+            <div class="tol-marker" id="tolMarker"><span></span> YOU ARE HERE</div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">DBT / MODULE 02</div>
+    </section>
+
+    <!-- ============ 6. MODULE 03 — MINDFULNESS ============ -->
+    <section id="mindfulness" class="module-section section" data-bg="assets/forest-dark.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">MODULE 03 — THE PART THAT WATCHES</p><h2>NOTICE IT BEFORE<br />IT DRIVES THE CAR.</h2></div>
+          <p class="head-note">Mindfulness in DBT is not relaxation. It is the practice of stepping one pace back from the signal so you can hear what it is actually saying.</p>
+        </div>
+        <div class="two-col">
+          <div class="panel pacer-panel">
+            <div class="panel-head"><span>SKILL 05 — THE PACER</span><span>4 : 7 : 8 / PARASYMPATHETIC</span></div>
+            <div class="pacer-meta"><span id="roundLabel">ROUND 1/8</span><span>5.7 BREATHS / MIN</span><span id="breathPhase">INHALE · 4</span></div>
+            <div class="pacer-wrap">
+              <svg class="pacer-ring" viewBox="0 0 400 400" aria-hidden="true">
+                <circle class="pacer-track" cx="200" cy="200" r="160" />
+                <circle class="pacer-progress" id="pacerProgress" cx="200" cy="200" r="160" />
+                <circle class="pacer-core" cx="200" cy="200" r="118" />
+              </svg>
+              <div class="pacer-center">
+                <span id="pacerPhase">INHALE</span>
+                <strong id="pacerCount">04</strong>
+                <small>SECONDS</small>
+              </div>
+              <span class="pacer-side left">EXHALE · 8</span>
+              <span class="pacer-side right">HOLD · 7</span>
+            </div>
+            <div class="pacer-controls">
+              <button class="play-btn" id="pacerPlay" aria-label="Start breathing pacer">▶</button>
+              <div class="pacer-time"><strong id="pacerTime">00:19</strong><span>/ 03:00</span></div>
+              <p>LONGER EXHALE THAN INHALE — THAT IS THE WHOLE SKILL.</p>
+            </div>
+          </div>
+          <div class="panel grounding-panel">
+            <div class="panel-head"><span>SKILL 06 — 5 · 4 · 3 · 2 · 1</span><span>SAY IT OUT LOUD</span></div>
+            <p class="panel-note">Counting needs your frontal lobe and the amygdala at the same time. It cannot catastrophize and describe a chipped mug at once.</p>
+            <div class="ground-list" id="groundList">
+              <div class="ground-row" data-count="5"><b>5</b><div><span>SIGHT</span><p>the lamp is grey, the floor is dark, the mug is chipped.</p></div><button class="dots" aria-label="Mark sight complete"><i></i><i></i><i></i><i></i><i></i></button></div>
+              <div class="ground-row" data-count="4"><b>4</b><div><span>TOUCH</span><p>the chair under you, the sleeve on your wrist, cold desk.</p></div><button class="dots" aria-label="Mark touch complete"><i></i><i></i><i></i><i></i></button></div>
+              <div class="ground-row" data-count="3"><b>3</b><div><span>SOUND</span><p>the fridge, a car outside, your own breath going out.</p></div><button class="dots" aria-label="Mark sound complete"><i></i><i></i><i></i></button></div>
+              <div class="ground-row" data-count="2"><b>2</b><div><span>SMELL</span><p>coffee, rain on concrete, your own skin.</p></div><button class="dots" aria-label="Mark smell complete"><i></i><i></i></button></div>
+              <div class="ground-row" data-count="1"><b>1</b><div><span>TASTE</span><p>mint, metal, nothing at all — that counts.</p></div><button class="dots" aria-label="Mark taste complete"><i></i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">DBT / MODULE 03 / ATTENTION TRAINING</div>
+    </section>
+
+    <!-- ============ 7. MODULE 04 INTRO ============ -->
+    <section id="ip-intro" class="interpersonal-intro section" data-bg="assets/water-lilies.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <p class="eyebrow">PLATE II — WATER GARDEN, 06:40</p>
+        <h2 class="script">You are not a problem<br />to be solved.</h2>
+        <p class="body-copy">No skill required for the next thirty seconds. Let the wave finish on its own — the leaves are not optimizing themselves either.</p>
+        <button class="play-link" data-play-pacer><span>▷</span> PLAY THE 4-7-8 PACE OVER THIS VIEW</button>
+      </div>
+      <div class="corner-tag">INTERPERSONAL EFFECTIVENESS</div>
+      <div class="bottom-note">DBT / MODULE 04 / DEAR MAN · GIVE · FAST</div>
+    </section>
+
+    <!-- ============ 8. DEAR MAN PATCH BAY ============ -->
+    <section id="dear-man" class="module-section section" data-bg="assets/forest-dark.jpg">
+      <div class="section-shade"></div>
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">MODULE 04 — THE PATCH BAY</p><h2>SAY THE TRUE THING.<br />KEEP THE PERSON.</h2></div>
+          <p class="head-note">DEAR MAN is a wiring diagram for one hard sentence. Seven jacks, patched in order. It does not make the ask smaller — it makes it land.</p>
+        </div>
+        <div class="two-col patch-grid">
+          <div class="panel patch-panel">
+            <div class="panel-head"><span>SKILL 07 — DEAR MAN PATCH BAY</span><span>4 IN — 1 OUT</span></div>
+            <div class="patch-scroll">
+              <div class="patch-stage">
+                <svg class="cables" viewBox="0 0 600 520" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M90,70 C250,90 300,430 510,450" /><path d="M230,70 C320,110 380,420 510,450" />
+                  <path d="M372,70 C430,110 470,420 510,450" /><path d="M510,70 C525,180 525,360 510,450" />
+                  <path d="M90,450 C200,450 400,450 510,450" /><path d="M230,450 C330,450 430,450 510,450" />
+                  <path d="M372,450 C430,450 480,450 510,450" />
+                </svg>
+                <div class="jack top" style="left:15%;top:13%"><i></i><b>D</b><span>DESCRIBE<small>Just the facts</small></span></div>
+                <div class="jack top" style="left:38.3%;top:13%"><i></i><b>E</b><span>EXPRESS<small>How it felt</small></span></div>
+                <div class="jack top" style="left:61.6%;top:13%"><i></i><b>A</b><span>ASSERT<small>What you want</small></span></div>
+                <div class="jack top" style="left:85%;top:13%"><i></i><b>R</b><span>REINFORCE<small>Why it matters</small></span></div>
+                <div class="jack bottom" style="left:15%;top:87%"><i></i><b>M</b><span>MINDFUL<small>Stay in the room</small></span></div>
+                <div class="jack bottom" style="left:38.3%;top:87%"><i></i><b>A</b><span>APPEAR CONFIDENT<small>Body does the talking</small></span></div>
+                <div class="jack bottom" style="left:61.6%;top:87%"><i></i><b>N</b><span>NEGOTIATE<small>Repeat / shade the tune</small></span></div>
+                <div class="jack out" style="left:85%;top:87%"><i></i><b>→</b><span>SENT</span></div>
+              </div>
+            </div>
+            <div class="panel-head panel-sub"><span>TOP ROW — THE CONTENT. BOTTOM ROW — THE DELIVERY.</span><button class="mini-btn" id="repatchBtn">↻ RE-PATCH A CABLE</button></div>
+          </div>
+          <div class="panel output-panel">
+            <div class="panel-head"><span>THE OUTPUT</span><span id="outputTimer">38 SEC · OUT LOUD</span></div>
+            <p class="panel-note">ONE SENTENCE, ASSEMBLED FROM SEVEN PARTS. READ IT, THEN SEND IT BEFORE THE REHEARSAL STARTS.</p>
+            <div class="output-lines" id="outputLines">
+              <div class="out-line"><b>D</b><div contenteditable="true" spellcheck="true" data-placeholder="Describe the facts…">When you cancelled on Friday,</div></div>
+              <div class="out-line"><b>E</b><div contenteditable="true" spellcheck="true" data-placeholder="Express the feeling…">I felt embarrassed, and a bit small.</div></div>
+              <div class="out-line"><b>A</b><div contenteditable="true" spellcheck="true" data-placeholder="Assert the ask…">I want us to lock a plan by Thursday.</div></div>
+              <div class="out-line"><b>R</b><div contenteditable="true" spellcheck="true" data-placeholder="Reinforce why…">It matters to me that we actually see each other.</div></div>
+              <div class="out-line"><b>M</b><div contenteditable="true" spellcheck="true" data-placeholder="Mindful note…">I know your week is brutal right now.</div></div>
+              <div class="out-line"><b>A</b><div contenteditable="true" spellcheck="true" data-placeholder="Appear confident…">Is Thursday still possible?</div></div>
+              <div class="out-line"><b>N</b><div contenteditable="true" spellcheck="true" data-placeholder="Negotiate…">If not, what about Sunday afternoon?</div></div>
+            </div>
+            <button class="btn btn-lime full" id="sendLine">PATCH IT TOGETHER →</button>
+            <div class="delivery-notes"><span><b>GIVE</b> Gentle · Interested · Validate · Easy manner</span><span><b>FAST</b> Fair · No Apologies · Stick to values · Truthful</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">DBT / MODULE 04 / DEAR MAN</div>
+    </section>
+
+    <!-- ============ 9. COGNITIVE / THOUGHT RECORD ============ -->
+    <section id="cognitive" class="cognitive section light-section">
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">MODULE 05 — THE AUDIT</p><h2>THE THOUGHT IS A<br />HYPOTHESIS, NOT A<br />VERDICT.</h2></div>
+          <p class="head-note">CBT does not ask you to think positive. It asks for evidence — the way you would for any other loud claim made at 3 a.m.</p>
+        </div>
+        <div class="two-col">
+          <div class="triangle-card">
+            <div class="panel-head"><span>THE COGNITIVE TRIANGLE</span><span>A / B / C</span></div>
+            <div class="triangle-stage" id="triangleStage">
+              <svg viewBox="0 0 500 420" preserveAspectRatio="none" aria-hidden="true">
+                <path class="tri-lines" d="M250,95 L120,310 L380,310 Z" />
+                <path class="tri-arrow" d="M250,230 L210,240 M250,230 L245,275" />
+              </svg>
+              <div class="tri-node thought" data-node="thought" style="left:50%;top:22%"><b>THOUGHT</b><span>"he thinks I'm useless"</span><small>start here ↗</small></div>
+              <div class="tri-node feeling" data-node="feeling" style="left:24%;top:74%"><b>FEELING</b><span>hot face, tight chest</span></div>
+              <div class="tri-node action" data-node="action" style="left:76%;top:74%"><b>ACTION</b><span>re-read, don't reply</span></div>
+              <span class="tri-flow f1">feeds ↙</span><span class="tri-flow f2">re-enforces →</span><span class="tri-flow f3">drives ↘</span>
+              <span class="tri-hint">DRAG A NODE — THE OTHER TWO MOVE WITH IT</span>
+            </div>
+          </div>
+          <div class="record-card">
+            <div class="panel-head"><span>THOUGHT RECORD — <span id="recordNum">041</span></span><span id="recordMeta">TUE 14:02 · 4 MIN</span></div>
+            <div class="record-fields">
+              <label><span>SITUATION</span><textarea id="recSituation" rows="2">Read the email twice. Did not reply.</textarea></label>
+              <label><span>AUTOMATIC THOUGHT</span><textarea id="recThought" rows="2">"She thinks I'm incompetent."</textarea></label>
+              <div class="distortion-chips" id="distortionChips"><button class="chip selected">MIND READING</button><button class="chip">CATASTROPHIZING</button><button class="chip">ALL-OR-NOTHING</button></div>
+              <label><span>EVIDENCE FOR</span><textarea id="recFor" rows="2">She rewrote the section I wrote. She copied my manager.</textarea></label>
+              <label><span>EVIDENCE AGAINST</span><textarea id="recAgainst" rows="2">She asked me to lead the next one. She rewrites everyone's, including her own.</textarea></label>
+              <label class="balanced"><span>BALANCED THOUGHT</span><textarea id="recBalanced" rows="2">"She edits everything. This is her process, not my verdict."</textarea><small id="beliefRate">NEW THOUGHT · RATE 4/10 BELIEVABLE · 9/10</small></label>
+            </div>
+            <div class="record-actions"><span id="entryCount">ENTRY 82 / 83</span><div><button class="mini-btn" id="rateBtn">RATE BELIEF</button><button class="mini-btn solid" id="addEvidence">+ ADD EVIDENCE</button><button class="mini-btn solid" id="saveRecord">SAVE RECORD</button></div></div>
+          </div>
+        </div>
+        <div class="noise-sources">
+          <div class="panel-head"><span>THE EIGHT NOISE SOURCES</span><span>COGNITIVE DISTORTIONS — TAP TO HEAR THE ORIGINAL SIGNAL</span></div>
+          <div class="noise-grid">
+            <div class="noise"><b>01</b><span>MIND READING</span><p>assuming you already know what they think of you.</p><i style="--w:70%"></i></div>
+            <div class="noise"><b>02</b><span>CATASTROPHIZING</span><p>running the worst-case film all the way to the end.</p><i style="--w:45%"></i></div>
+            <div class="noise"><b>03</b><span>ALL-OR-NOTHING</span><p>perfect or ruined, no third option exists.</p><i style="--w:80%"></i></div>
+            <div class="noise"><b>04</b><span>SHOULD STATEMENTS</span><p>rules you never agreed to, applied to everyone.</p><i style="--w:60%"></i></div>
+            <div class="noise"><b>05</b><span>LABELLING</span><p>one adjective, permanently glued to a whole person.</p><i style="--w:75%"></i></div>
+            <div class="noise"><b>06</b><span>FORTUNE TELLING</span><p>predicting the future, then moving in.</p><i style="--w:55%"></i></div>
+            <div class="noise"><b>07</b><span>EMOTIONAL REASONING</span><p>it feels true, therefore it must be true.</p><i style="--w:65%"></i></div>
+            <div class="noise"><b>08</b><span>PERSONALISATION</span><p>every silence in the room is about you.</p><i style="--w:50%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="corner-tag">CBT / THE THOUGHT RECORD / WORKSHEET 041</div>
+    </section>
+
+    <!-- ============ 10. THE WAVE ============ -->
+    <section id="wave" class="wave-section section">
+      <div class="wrap">
+        <div class="section-head split-head">
+          <div><p class="eyebrow">THE PART NOBODY TELLS YOU</p><h2>THE WAVE LASTS 90 SECONDS.<br />YOU DO THE REST.</h2></div>
+          <p class="head-note">The chemical wave of an emotion rises, crests and clears in about ninety seconds. What keeps it alive for six hours is you replaying the story that started it.</p>
+        </div>
+        <div class="wave-card">
+          <canvas id="waveCanvas"></canvas>
+          <button class="wave-play" id="wavePlay" aria-label="Play the 90 second wave">▶</button>
+        </div>
+        <div class="wave-phases">
+          <div><span>RISE · 0–30s</span><h3>NAME IT, DON'T NARRATE IT</h3><p>"This is anger." Two words. Naming an emotion lowers amygdala activity; telling its story turns the volume back up.</p></div>
+          <div><span>CREST · 30–60s</span><h3>RIDE, DON'T DECIDE</h3><p>Nothing important gets decided at the crest. Send no message, sign nothing, quit nothing. Breathe out longer than in.</p></div>
+          <div><span>FALL · 60–90s</span><h3>DON'T RE-RUN THE TAPE</h3><p>The wave will fall on its own. Every replay restarts the chemistry — this is the whole mechanism.</p></div>
+          <div><span>REPLAY · AFTER</span><h3>SURF, THEN CHOOSE</h3><p>An urge is a wave too, usually cresting inside 10–30 minutes. You do not have to obey a wave.</p></div>
+        </div>
+      </div>
+      <div class="corner-tag">THE 90-SECOND RULE · URGE SURFING</div>
+    </section>
+
+    <!-- ============ 11. SHELF + START + FOOTER ============ -->
+    <section id="shelf" class="shelf section">
+      <div class="wrap">
+        <div class="panel-head"><span>THE BEST OF THE SHELF</span><span>SEVENTH IN THE DRAWER</span></div>
+        <div class="shelf-grid">
+          <div><b>RADICAL ACCEPTANCE</b><p>Pain is not the problem. Pain plus "this shouldn't be happening" is.</p></div>
+          <div><b>SELF-COMPASSION</b><p>Say to yourself what you would say to a friend at 3 a.m.</p></div>
+          <div><b>IMPROVE THE MOMENT</b><p>Imagery, meaning, one thing at a time, a short vacation.</p></div>
+          <div><b>WORRY TIME</b><p>Fifteen minutes, scheduled. Outside it, the task is closed.</p></div>
+          <div><b>ACTIVATION</b><p>Motion before motivation. Rate mastery and pleasure 1–10.</p></div>
+          <div><b>HALT CHECK</b><p>Hungry, angry, lonely, tired — fix the body before the story.</p></div>
+          <div><b>RAIN</b><p>Recognise, allow, investigate, nurture. For feelings with no name.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start" class="start-section section">
+      <div class="wrap">
+        <div class="quote-block" id="quoteBlock" role="button" tabindex="0" aria-label="Show another field note">
+          <span class="quote-mark">“</span>
+          <blockquote id="quoteText">I don't need to be fixed. I need a hand on the dial until I can reach it myself.</blockquote>
+          <p class="fineprint" id="quoteSource">— FIELD NOTE 212 · TRANSCRIBED WITH PERMISSION</p>
+          <p class="quote-hint">↻ CLICK TO HEAR ANOTHER NOTE</p>
+        </div>
+        <div class="start-cta" data-bg="assets/forest-path.jpg">
+          <div class="section-shade"></div>
+          <div class="start-copy"><p class="eyebrow">TURN IT DOWN — OR TURN IT UP, SLOWLY</p><h2>START AT<br />CHANNEL ONE.</h2></div>
+          <div class="start-actions">
+            <p>Twenty-seven instruments. No onboarding quiz, no streak to protect. Open the console, pick the loudest channel, and turn one knob.</p>
+            <button class="btn btn-lime" data-open-console>OPEN THE CONSOLE <span>→</span></button>
+            <button class="btn btn-brown" id="printCard">▤ PRINT THE FIELD CARD (A6)</button>
+          </div>
+        </div>
+        <div class="safety-note">
+          <div><span class="shield">⬡</span><p><b>THIS IS A PRACTICE TOOL, NOT EMERGENCY CARE.</b><br />If you are in danger or thinking about hurting yourself, put the console down and call your local emergency number or a crisis line. Then tell one real person. SIGNAL is a rehearsal space for skills you may already be learning in therapy — not a replacement for it.</p></div>
+          <button class="mini-btn" id="findLine">FIND A LINE ↗</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand"><span class="brand-mark"><span></span></span><span class="brand-name">SIGNAL</span></div>
+          <p>A skill console for the loud parts of being a person. Built on dialectical behaviour therapy and cognitive behavioural therapy, with respect for both.</p>
+        </div>
+        <div><h4>INSTRUMENTS</h4><a href="#mindfulness">The Pacer</a><a href="#dear-man">Patch Bay</a><a href="#cognitive">Thought Record</a><a href="#er">Window of Tolerance</a></div>
+        <div><h4>THEORY</h4><a href="#rack">DBT, in four modules</a><a href="#cognitive">CBT, in one worksheet</a><a href="#wave">The 90-second rule</a><a href="#shelf">Sources &amp; credits</a></div>
+        <div><h4>PRACTICE</h4><a href="#shelf">Field card</a><a href="#mindfulness">Audio pacer</a><a href="#" data-saved-records>Saved records</a><a href="#start">For clinicians</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 SIGNAL — A QUIET TOOL, IN QUIET DESIGN.</span><span>MARSHA LINEHAN · AARON BECK · DANIEL SIEGEL · JILL BOLTE TAYLOR</span></div>
+    </div>
+  </footer>
+
+  <!-- ============ CONSOLE MODAL ============ -->
+  <div class="modal" id="consoleModal" role="dialog" aria-modal="true" aria-label="Signal console">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <div class="modal-head"><div><span class="eyebrow">SIGNAL / CONSOLE</span><h2>THE OPEN CHANNEL</h2></div><button class="close-modal" data-close-modal aria-label="Close">✕</button></div>
+      <div class="modal-body">
+        <div class="modal-note">Nothing here needs a name. Type until the knot loosens — this space is yours, and it stays on this device only.</div>
+        <div class="journal-tools">
+          <button class="chip" data-prompt="What is loudest right now?">WHAT'S LOUDEST?</button>
+          <button class="chip" data-prompt="What do I know is true?">WHAT'S TRUE?</button>
+          <button class="chip" data-prompt="One small useful move:">ONE SMALL MOVE</button>
+          <span id="wordCount">0 WORDS</span>
+        </div>
+        <textarea id="journal" placeholder="Start anywhere…"></textarea>
+        <div class="journal-foot"><span id="journalStatus">SAVED LOCALLY</span><button class="btn btn-lime" id="clearJournal">CLEAR</button></div>
+        <div class="saved-list" id="savedList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
