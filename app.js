@@ -157,19 +157,21 @@
     const emo = +$('[data-fader="anxiety"] input').value / 100;
     const rea = +$('[data-fader="rumination"] input').value / 100;
     const ten = +$('[data-fader="tension"] input').value / 100;
-    const wave = (color, amp, freq, phase, noise) => {
-      ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 1.6;
+    // Both channels are clean sinusoids: y = A·sin(2πft + φ).
+    // Same amplitude and frequency; only the phase offset differs.
+    const wave = (color, phase, amp) => {
+      ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 1.8;
       for (let x = 0; x <= w; x += 2) {
-        const p = (x / w) * freq * Math.PI * 2 + phase;
-        const n = Math.sin(p * 3.7) * noise + Math.sin(p * 7.1) * noise * .5;
-        const y = h / 2 + Math.sin(p) * amp * (h * .32) + n * amp * 12 * (1 + ten);
+        const p = (x / w) * 5 * Math.PI * 2 + phase;
+        const y = h / 2 + Math.sin(p) * amp * (h * .30);
         x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.stroke();
     };
     const phase = t * .0012 + scrub * .02;
-    wave('rgba(217,154,108,.85)', .22 + emo * .65, 3, phase, .16 + emo * .2);
-    wave('rgba(217,232,165,.85)', .1 + rea * .35, 8, -phase * .7, .07);
+    const amp = .25 + (emo + rea + ten) / 3 * .45;
+    wave('rgba(217,154,108,.9)', phase, amp);
+    wave('rgba(217,232,165,.9)', phase + Math.PI / 2, amp);
     ctx.fillStyle = 'rgba(242,233,216,.35)'; ctx.font = '10px "IBM Plex Mono", monospace';
     ctx.fillText('AMPLITUDE / TIME', 10, 18);
   }
@@ -397,47 +399,8 @@
   });
 
   /* ---------- cognitive triangle ---------- */
-  const stage = $('#triangleStage');
-  const triLines = $('.tri-lines', stage), triArrow = $('.tri-arrow', stage);
-  const nodes = $$('.tri-node', stage);
-  const defaults = {
-    thought: { x: .5, y: .22 }, feeling: { x: .24, y: .74 }, action: { x: .76, y: .74 }
-  };
-  function placeNode(node, x, y) {
-    node.style.left = clamp(x, 10, 90) + '%';
-    node.style.top = clamp(y, 12, 88) + '%';
-  }
-  function redrawTriangle() {
-    const pts = nodes.map(n => ({ x: parseFloat(n.style.left) / 100 * stage.clientWidth, y: parseFloat(n.style.top) / 100 * stage.clientHeight }));
-    if (pts.length < 3) return;
-    triLines.setAttribute('d', `M${pts[0].x},${pts[0].y} L${pts[1].x},${pts[1].y} L${pts[2].x},${pts[2].y} Z`);
-    const mx = (pts[0].x + pts[1].x) / 2, my = (pts[0].y + pts[1].y) / 2;
-    triArrow.setAttribute('d', `M${mx},${my} L${mx - 28},${my + 10} M${mx},${my} L${mx + 4},${my + 32}`);
-  }
-  nodes.forEach((node, i) => {
-    const saved = store.get('tri' + i, null);
-    if (saved) placeNode(node, saved.x, saved.y);
-    let dragging = false, dx = 0, dy = 0;
-    node.addEventListener('pointerdown', e => {
-      dragging = true; node.setPointerCapture(e.pointerId);
-      const r = node.getBoundingClientRect();
-      dx = e.clientX - (r.left + r.width / 2); dy = e.clientY - (r.top + r.height / 2);
-      node.style.cursor = 'grabbing';
-    });
-    node.addEventListener('pointermove', e => {
-      if (!dragging) return;
-      const r = stage.getBoundingClientRect();
-      const x = (e.clientX - r.left - dx) / r.width * 100;
-      const y = (e.clientY - r.top - dy) / r.height * 100;
-      placeNode(node, x, y); redrawTriangle();
-    });
-    node.addEventListener('pointerup', () => {
-      dragging = false; node.style.cursor = 'grab';
-      store.set('tri' + i, { x: parseFloat(node.style.left), y: parseFloat(node.style.top) });
-    });
-  });
-  redrawTriangle();
-  window.addEventListener('resize', redrawTriangle);
+  /* Static diagram — positions and connectors are fixed to the reference layout. */
+
 
   /* ---------- thought record ---------- */
   const recordIds = ['recSituation', 'recThought', 'recFor', 'recAgainst', 'recBalanced'];

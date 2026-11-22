@@ -312,17 +312,17 @@ p{margin:0 0 1em}
 .patch-scroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
 .patch-scroll::-webkit-scrollbar{height:6px}
 .patch-scroll::-webkit-scrollbar-thumb{background:var(--line-strong)}
-.patch-stage{position:relative;height:520px;margin-top:18px}
+.patch-stage{position:relative;height:560px;margin-top:18px}
 .cables{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--peach);stroke-width:1.3;opacity:.75;pointer-events:none}
 .cables path:nth-child(n+5){stroke:var(--lime);opacity:.6}
 .cables path.flicker{animation:cable 1.2s ease}
 @keyframes cable{0%{stroke-width:5;opacity:1}100%{stroke-width:1.3;opacity:.75}}
-.jack{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-50%,-50%)}
+.jack{position:absolute;display:flex;flex-direction:column;align-items:center;gap:4px;width:110px;text-align:center;transform:translate(-50%,-50%)}
 .jack i{width:26px;height:26px;border-radius:50%;border:2px solid var(--peach);background:#241d15;display:block;position:relative;flex-shrink:0}
 .jack i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--peach)}
-.jack b{font:500 13px var(--serif);color:var(--peach);width:12px}
-.jack span{font:500 10px/1.2 var(--mono);letter-spacing:.08em;color:var(--cream);display:flex;flex-direction:column;white-space:nowrap}
-.jack small{color:var(--dim);font-size:9px;margin-top:2px}
+.jack b{font:500 13px var(--serif);color:var(--peach);width:auto}
+.jack span{font:500 9px/1.25 var(--mono);letter-spacing:.08em;color:var(--cream);display:flex;flex-direction:column;white-space:normal;align-items:center}
+.jack small{color:var(--dim);font-size:8px;margin-top:2px}
 .jack.bottom i{border-color:var(--lime)}
 .jack.bottom i::after{background:var(--lime)}
 .jack.bottom b,.jack.bottom span{color:var(--lime)}
@@ -349,17 +349,15 @@ p{margin:0 0 1em}
 .light-section .triangle-card .panel-head{border-color:rgba(70,55,35,.2)}
 .triangle-stage{position:relative;height:520px;margin-top:10px;background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:34px 34px}
 .triangle-stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.tri-lines{fill:none;stroke:#6f6b3e;stroke-width:1.5}
-.tri-arrow{fill:none;stroke:#6f6b3e;stroke-width:1.2}
-.tri-node{position:absolute;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:#fbf6e8;border:1px solid #6f6b3e;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:grab;box-shadow:0 3px 0 rgba(90,80,40,.15);transition:box-shadow .2s}
-.tri-node:active{cursor:grabbing}
+.tri-lines{fill:none;stroke:#6f6b3e;stroke-width:1.5;vector-effect:non-scaling-stroke}
+.tri-arrow{fill:none;stroke:#6f6b3e;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.tri-node{position:absolute;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:#fbf6e8;border:1px solid #6f6b3e;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:default;box-shadow:0 3px 0 rgba(90,80,40,.15)}
 .tri-node.thought{border-color:#b06d3e;box-shadow:0 0 0 8px rgba(176,109,62,.12),0 3px 0 rgba(90,80,40,.15)}
 .tri-node b{font:500 11px var(--mono);letter-spacing:.12em;color:#3a3120}
 .tri-node span{font:italic 13px/1.3 var(--serif);color:#4a402d;margin-top:6px}
 .tri-node small{font:500 9px var(--mono);color:#b06d3e;margin-top:6px}
-.tri-flow{position:absolute;font:500 9px var(--mono);color:#6f6b3e}
-.tri-flow.f1{left:22%;top:52%}.tri-flow.f2{left:44%;bottom:21%}.tri-flow.f3{right:17%;top:52%}
-.tri-hint{position:absolute;bottom:10px;left:14px;font:500 9px var(--mono);letter-spacing:.08em;color:#6b6b48}
+.tri-flow{position:absolute;font:500 9px var(--mono);color:#6f6b3e;pointer-events:none}
+.tri-flow.f1{left:23%;top:50%}.tri-flow.f2{left:42%;top:83%}.tri-flow.f3{right:12%;top:46%}
 .record-card{padding:20px;background:#f8f2e0;border:1px solid rgba(70,55,35,.2)}
 .record-fields label{display:block;margin-bottom:12px}
 .record-fields label>span{display:block;font:500 10px var(--mono);letter-spacing:.12em;color:#8a6a3f;margin-bottom:4px}
@@ -474,12 +472,6 @@ p{margin:0 0 1em}
   .shelf-grid{grid-template-columns:repeat(4,1fr)}
   .shelf-grid>div:nth-child(4){border-right:none}
   .noise-grid{grid-template-columns:repeat(2,1fr)}
-  /* patch bay: stack each label under its jack so nothing collides */
-  .patch-stage{height:560px}
-  .jack{flex-direction:column;gap:4px;width:110px;text-align:center}
-  .jack b{width:auto}
-  .jack span{white-space:normal;align-items:center;font-size:9px;line-height:1.25}
-  .jack small{font-size:8px}
 }
 @media(max-width:900px){
   html{scroll-padding-top:60px}

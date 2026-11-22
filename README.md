@@ -12,6 +12,19 @@ python -m http.server 8080
 
 then visit `http://localhost:8080`.
 
+## Upload to GitHub
+
+This folder is already an initialized git repository with an initial commit on `main`.
+To publish it to your existing empty GitHub repo:
+
+```
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git branch -M main
+git push -u origin main
+```
+
+If the remote already exists, use `git remote set-url origin <url>` instead of `add`.
+
 ## What's interactive
 
 - **Header / navigation** — anchor links to every section, active-section highlighting, mobile menu.
@@ -28,7 +41,7 @@ then visit `http://localhost:8080`.
 - **4-7-8 pacer** — animated ring, phase countdown, 3-minute session timer, play/pause.
 - **5-4-3-2-1 grounding** — clickable sense counters.
 - **DEAR MAN patch bay** — seven editable lines, re-patch animation, assemble/copy the sentence to the journal, 38-second read-aloud timer.
-- **Cognitive triangle** — drag any node; connecting lines follow.
+- **Cognitive triangle** — static reference diagram (no movement).
 - **Thought record** — editable fields, distortion chips, add-evidence, belief rating, save to journal.
 - **The 90-second wave** — playable animated chemistry curve.
 - **Print field card** — opens the browser print dialog with a print stylesheet.
