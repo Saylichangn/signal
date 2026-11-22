@@ -157,8 +157,7 @@
     const emo = +$('[data-fader="anxiety"] input').value / 100;
     const rea = +$('[data-fader="rumination"] input').value / 100;
     const ten = +$('[data-fader="tension"] input').value / 100;
-    // Both channels are clean sinusoids: y = A·sin(2πft + φ).
-    // Same amplitude and frequency; only the phase offset differs.
+    // Single clean sinusoid: y = A·sin(2πft + φ).
     const wave = (color, phase, amp) => {
       ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 1.8;
       for (let x = 0; x <= w; x += 2) {
@@ -171,7 +170,6 @@
     const phase = t * .0012 + scrub * .02;
     const amp = .25 + (emo + rea + ten) / 3 * .45;
     wave('rgba(217,154,108,.9)', phase, amp);
-    wave('rgba(217,232,165,.9)', phase + Math.PI / 2, amp);
   }
 
   /* ---------- faders ---------- */
