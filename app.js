@@ -479,7 +479,6 @@
     }
     curve(0, chemX, false, '#e8dfcd', 1.6);
     curve(chemX, w, true, '#d99a6c', 1.3);
-    ctx.fillStyle = '#d99a6c'; ctx.beginPath(); ctx.arc(w * .3, h * .78 - h * .58, 4, 0, 7); ctx.fill();
     // travelling marker
     const mx = xAt(waveT, w);
     const my = h * .78 - waveY(waveT) * h * .58;
