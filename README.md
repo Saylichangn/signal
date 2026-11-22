@@ -1,6 +1,7 @@
 # SIGNAL — skill console website
 
-A functional, interactive single-page build of the SIGNAL mockups. Plain HTML/CSS/JS — no build step.
+Psychological methods page. 
+HTML/CSS/JS
 
 ## Run it
 
