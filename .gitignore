@@ -30,3 +30,5 @@ _test_*.png
 _*.png
 _*.jpg
 contact.jpg
+
+.vercel
