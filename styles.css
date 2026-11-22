@@ -123,15 +123,8 @@ p{margin:0 0 1em}
 .panel-head b{color:var(--cream)}
 .panel-sub{margin-top:14px;padding-top:13px;font-size:10px;color:var(--dim)}
 .panel-note{font:400 14px/1.6 var(--mono);color:var(--muted);margin:14px 0 0}
-.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--peach);margin-right:6px;animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35;box-shadow:0 0 0 5px rgba(217,154,108,.12)}}
-.panel-legend{display:flex;gap:18px;align-items:center;padding:12px 0;font:400 12px var(--mono);color:var(--muted)}
-.panel-legend b{color:var(--cream)}
-.line-swatch{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:5px}
-.line-swatch.peach{background:var(--peach)}
-.line-swatch.lime{background:var(--lime)}
-.drag-hint{margin-left:auto;color:var(--peach)}
-.monitor-screen{height:238px;border:1px solid var(--line);background:rgba(15,12,9,.55);position:relative;overflow:hidden}
+.monitor-panel{display:flex;flex-direction:column}
+.monitor-screen{flex:1;min-height:238px;border:1px solid var(--line);background:rgba(15,12,9,.55);position:relative;overflow:hidden}
 .monitor-screen canvas{width:100%;height:100%;display:block;cursor:ew-resize}
 .monitor-readout{position:absolute;right:10px;bottom:8px;font:500 12px var(--mono);color:var(--peach);letter-spacing:.1em}
 .panel-foot{display:flex;justify-content:space-between;gap:12px;padding-top:12px;font:400 11px/1.5 var(--mono);color:var(--dim);letter-spacing:.06em}

@@ -172,8 +172,6 @@
     const amp = .25 + (emo + rea + ten) / 3 * .45;
     wave('rgba(217,154,108,.9)', phase, amp);
     wave('rgba(217,232,165,.9)', phase + Math.PI / 2, amp);
-    ctx.fillStyle = 'rgba(242,233,216,.35)'; ctx.font = '11px "Barlow Condensed", sans-serif';
-    ctx.fillText('AMPLITUDE / TIME', 10, 18);
   }
 
   /* ---------- faders ---------- */
@@ -185,8 +183,6 @@
   function updateFaderReadout() {
     const a = +$('[data-fader="anxiety"] input').value;
     const r = +$('[data-fader="rumination"] input').value;
-    $('#emotionHz').textContent = (1 + a / 34).toFixed(1);
-    $('#reasonHz').textContent = (4 + r / 11).toFixed(1);
     $('#signalStrength').textContent = 'SIGNAL ' + Math.round((a + r) / 2 + 15) + '%';
     store.set('faders', { a, r, t: +$('[data-fader="tension"] input').value });
   }
