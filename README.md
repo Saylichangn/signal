@@ -1,6 +1,6 @@
 # SIGNAL — skill console website
 
-Psychological methods page. 
+Psychological methods page: a journal and guidance-based approach.
 HTML/CSS/JS
 
 ## Run it
